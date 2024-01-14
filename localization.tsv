@@ -1,1 +1,16 @@
 Term	Notes	English
+suppressmod_config		Suppress "New" Icons...
+suppressmod_cardicon		... On Cards
+suppressmod_cardicon_tooltip		When a card of a type never seen before is created, it displays a "New" icon.
+suppressmod_cardopedia		... In Cardopedia
+suppressmod_cardopedia_tooltip		Entries in Cardopedia and the Cardopedia menu items on the Main Menu and Pause Menu are affected.
+suppressmod_ideas		... In Ideas Tab
+suppressmod_ideas_tooltip		As ideas are discovered, no "New" icon is displayed and the tab will not have an orange exclamation point.
+suppressmod_quests		... In Quest Tab
+suppressmod_quests_tooltip		As quests are discovered, no "New" icon is displayed and the tab will not have an orange exclamation point.
+suppressmod_packs		... When Booster Pack#          Unlocked
+suppressmod_packs_tooltip		The "New" icon doesn't last long here. This is included for completeness. It will not suppress new icons that already exist.
+suppressmod_allon		Turn all on
+suppressmod_allon_tooltip		Update all settings at once.
+suppressmod_alloff		Turn all off
+suppressmod_alloff_tooltip		Update all settings at once.

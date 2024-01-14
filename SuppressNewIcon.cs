@@ -30,13 +30,61 @@ namespace SuppressNewIconModNS
         {
             instance = this;
 
-            _ = new ConfigFreeText("suppressmod_config", Config, "suppressmod_config");
+            _ = new ConfigFreeText("suppressmod_config", Config, "suppressmod_config")
+            {
+                TextAlign = TextAlign.Left
+            };
 
             configSuppressCardIcon = CreateBool("suppressmod_cardicon");
             configSuppressCardopedia = CreateBool("suppressmod_cardopedia");
             configSuppressIdeas = CreateBool("suppressmod_ideas");
             configSuppressQuests = CreateBool("suppressmod_quests");
             configSuppressBoosterPacks = CreateBool("suppressmod_packs");
+
+            _ = new ConfigFreeText("allon", Config, "suppressmod_allon", "suppressmod_allon_tooltip")
+            {
+                FontSize = 25,
+                TextAlign = TextAlign.Right,
+                Clicked = delegate (ConfigEntryBase _, CustomButton _)
+                {
+                    configSuppressCardIcon.Value =
+                    configSuppressCardopedia.Value =
+                    configSuppressIdeas.Value =
+                    configSuppressQuests.Value =
+                    configSuppressBoosterPacks.Value = true;
+                }
+            };
+            _ = new ConfigFreeText("alloff", Config, "suppressmod_alloff", "suppressmod_alloff_tooltip")
+            {
+                FontSize = 25,
+                TextAlign = TextAlign.Right,
+                Clicked = delegate(ConfigEntryBase _, CustomButton _)
+                {
+                    configSuppressCardIcon.Value =
+                    configSuppressCardopedia.Value =
+                    configSuppressIdeas.Value =
+                    configSuppressQuests.Value =
+                    configSuppressBoosterPacks.Value = false;
+                }
+            };
+
+            Config.OnSave = delegate
+            {
+                Log($"Card Icons: {SuppressCardIcon}, Ideas: {SuppressIdeas}, Cardopedia: {SuppressCardopedia}, Quests: {SuppressQuests}, BoosterPacks: {SuppressBoosterPacks}");
+                if (SuppressCardopedia)
+                {
+                    I.WM.CurrentSave.NewCardopediaIds.Clear();
+                    CardopediaScreen.instance.RefreshCardopedia();
+                }
+                if (SuppressIdeas)
+                {
+                    I.WM.CurrentSave.NewKnowledgeIds.Clear();
+                }
+                if (SuppressQuests)
+                {
+                    QuestManager.instance.UpdateCurrentQuests();
+                }
+            };
 
             //WorldManagerPatches.LoadSaveRound += WM_OnLoad;
             //WorldManagerPatches.GetSaveRound += WM_OnSave;
@@ -55,7 +103,8 @@ namespace SuppressNewIconModNS
                 TooltipTerm = name + "_tooltip"
             })
             {
-                currentValueColor = Color.blue
+                currentValueColor = Color.blue,
+                FontSize = 25
             };
         }
 
