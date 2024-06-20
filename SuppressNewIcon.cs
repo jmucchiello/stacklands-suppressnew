@@ -84,6 +84,10 @@ namespace SuppressNewIconModNS
                 {
                     QuestManager.instance.UpdateCurrentQuests();
                 }
+                if (SuppressBoosterPacks)
+                {
+
+                }
             };
 
             //WorldManagerPatches.LoadSaveRound += WM_OnLoad;
